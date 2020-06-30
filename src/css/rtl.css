@@ -1,0 +1,6 @@
+[dir="rtl"] .splitter-layout:not(.splitter-layout-vertical) {
+	flex-direction: row-reverse;
+}
+.splitter-layout .layout-pane{
+	direction: rtl;
+}
