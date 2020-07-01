@@ -1,0 +1,16 @@
+.isCollapsed{
+	width: 0px;
+	transition: width 0.3s;
+}
+.isExpand .layout-pane.layout-pane-primary{
+	flex:0 0 auto;
+	width:100%;
+	transition: width 0.3s;
+}
+.isExpand .layout-splitter{
+	display: none;
+}
+
+.splitter-layout .layout-pane.layout-pane-primary {
+	transition: width 0.3s;
+}

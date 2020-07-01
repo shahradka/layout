@@ -10,6 +10,7 @@ import CollapsibleButton from './CollapsibleButton';
 import HeaderContainer from './HeaderContainer';
 import 'react-splitter-layout/lib/index.css';
 import './css/rtl.css';
+import './css/styles.css';
 
 function fetchChildren(input)
 {
@@ -47,7 +48,7 @@ function fetchChildren(input)
 		const nav = children.map(child => {
 				if(child.key === "navigation")
 					return(
-						<Nav key={child.id}>
+						<Nav key={child.id} >
 							{fetchChildren(child)}
 						</Nav>
 					)
@@ -55,11 +56,18 @@ function fetchChildren(input)
 
 	return (
 
-		<SplitterLayout primaryMinSize={bodyMinWidth} secondaryMinSize={navMinWidth} secondaryInitialSize={navWidth} percentage={isPercentage}>
+		<SplitterLayout
+		primaryMinSize={bodyMinWidth}
+		secondaryMinSize={navMinWidth}
+		secondaryInitialSize={navWidth}
+		percentage={isPercentage}
+		onSecondaryPaneSizeChange={handleDragStart}
+		customClassName={isCollapsed? 'isExpand' : ''}
+		>
 			<Container>
 				{headerBodyFooter}
 			</Container>
-			<Nav>
+			<Nav className={isCollapsed? 'isCollapsed' : ''}>
 				{nav}
 			</Nav>
 		</SplitterLayout>

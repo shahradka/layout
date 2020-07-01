@@ -5,7 +5,7 @@ const NavDemo = styled(Nav)`
 	overflow-y: auto;
 	background-color: #ccc;
 	height: 100%;
-	line-height: 580px;
+	line-height: 50px;
 	text-align: center;
 `
 export default NavDemo;

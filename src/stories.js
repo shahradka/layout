@@ -4,6 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 // Import our component from this folder
 import LayoutNCHBFDemo from './LayoutNCHBFDemo';
+import LayoutHNCBFDemo from './LayoutHNCBFDemo';
 
 // Here we describe the stories we want to see of the Button. The component is
 // pretty simple so we will just make two, one with text and one with emojis
@@ -298,4 +299,25 @@ storiesOf('LayoutNCHBF')
 				<h5>Footer</h5>
 			</div>
 		</LayoutNCHBFDemo>
-	));
+	))
+	storiesOf('LayoutHNCBF')
+	.add('base', () => (
+		<LayoutHNCBFDemo>
+			<div key="header">
+				<h5>Header</h5>
+			</div>
+			<div key="navigation">
+				<a>link1</a>
+				<a>link2</a>
+				<a>link3</a>
+				<a>link4</a>
+			</div>
+			<div key="body">
+				{table}
+			</div>
+			<div key="footer">
+				<h5>Footer</h5>
+			</div>
+		</LayoutHNCBFDemo>
+	))
+

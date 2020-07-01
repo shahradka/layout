@@ -1,3 +1,4 @@
 // Export all the explicitly exported components, this file will contain our
 // components when built by webpack and sent off to the world.
-export {default as Layout } from './Layout131';
+export {LayoutNCHBF} from './LayoutNCHBF';
+export {LayoutHNCBF } from './LayoutHNCBF';
