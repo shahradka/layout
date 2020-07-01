@@ -1,6 +1,6 @@
 {
   "name": "@ReactSeam/Layout",
-  "version": "0.0.3",
+  "version": "0.0.8",
   "description": "Layout Component description",
   "license": "ISC",
   "main": "dist/Layout.js",

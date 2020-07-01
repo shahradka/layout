@@ -3,9 +3,9 @@ import styled from 'styled-components';
 const Footer = styled.div`
 	direction:rtl;
 	min-height:53px;
-	position: relative;
+	position: absolute;
 	bottom: 0px;
-	left: 2px;
+	left: 0px;
 	width: 100%;
 	bottom: 0px;
 `

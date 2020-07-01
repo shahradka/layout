@@ -302,7 +302,7 @@ storiesOf('LayoutNCHBF')
 	))
 	storiesOf('LayoutHNCBF')
 	.add('base', () => (
-		<LayoutHNCBFDemo>
+		<LayoutHNCBFDemo >
 			<div key="header">
 				<h5>Header</h5>
 			</div>

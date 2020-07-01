@@ -1,4 +1,4 @@
-import React,{Children} from 'react';
+import React,{useState} from 'react';
 import Header from './Header';
 import Body from './BodyDemo';
 import Nav from './NavDemo';
@@ -21,12 +21,17 @@ function fetchChildren(input)
 
 	const LayoutNCHBF = ({children, navMinWidth, navWidth, bodyMinWidth, isPercentage}) =>
 	{
+		const [isCollapsed,setIsCollapsed] = useState(false);
+		function handleClick(e)
+		{
+			setIsCollapsed(!isCollapsed);
+		}
 		const headerBodyFooter = children.map(child => {
 			if(child.key === "header")
 				return (
 					<HeaderContainer>
-						<CollapsibleButton />
-						<Header key={child.id}>
+					<CollapsibleButton onClick={handleClick} />
+					<Header key={child.id}>
 						{fetchChildren(child)}
 						</Header>
 					</HeaderContainer>
@@ -61,7 +66,6 @@ function fetchChildren(input)
 		secondaryMinSize={navMinWidth}
 		secondaryInitialSize={navWidth}
 		percentage={isPercentage}
-		onSecondaryPaneSizeChange={handleDragStart}
 		customClassName={isCollapsed? 'isExpand' : ''}
 		>
 			<Container>
