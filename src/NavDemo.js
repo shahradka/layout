@@ -7,5 +7,9 @@ const NavDemo = styled(Nav)`
 	height: 100%;
 	line-height: 50px;
 	text-align: center;
+	ul {
+		display:flex;
+		flex-direction:${props => props.horizonNav? 'row' : 'column'};
+	}
 `
 export default NavDemo;

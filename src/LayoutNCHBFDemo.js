@@ -13,73 +13,48 @@ import 'react-splitter-layout/lib/index.css';
 import './css/rtl.css';
 import './css/styles.css';
 
-function fetchChildren(input)
+
+const LayoutNCHBF = ({children, header, nav, footer, navMinWidth, navWidth, bodyMinWidth, isPercentage}) =>
 {
-	if(!input || !input.children)
-		return input;
-	return fetchChildren(input.children);
-}
-
-	const LayoutNCHBFDemo = ({children, navMinWidth, navWidth, bodyMinWidth, isPercentage}) =>
+	const [isCollapsed,setIsCollapsed] = useState(false);
+	function handleClick(e)
 	{
-		const [isCollapsed,setIsCollapsed] = useState(false);
+		setIsCollapsed(!isCollapsed);
+	}
+	const headerTemplates = <HeaderContainerDemo><CollapsibleButton onClick={handleClick} /><Header>{header}</Header></HeaderContainerDemo>;
+	const bodyTemplates = 	<BodyDemo>{children}</BodyDemo>;
+	const footerTemplates = <FooterDemo>{footer}</FooterDemo>;
 
-		function handleClick(e)
-		{
-			setIsCollapsed(!isCollapsed);
-		}
-		const headerBodyFooter = children.map(child => {
-			if(child.key === "header")
-				return (
-					<HeaderContainerDemo>
-						<CollapsibleButton onClick={handleClick} />
-						<Header key={child.key}>
-							{fetchChildren(child)}
-						</Header>
-					</HeaderContainerDemo>
-				)
-			else if(child.key === "body")
-					return(
-						<BodyDemo key={child.key}>
-							{fetchChildren(child)}
-						</BodyDemo>
-					)
-			else if(child.key === "footer")
-			return(
-				<FooterDemo key={child.key}>
-					{fetchChildren(child)}
-				</FooterDemo>
-			)
+return (
 
-		});
-		const nav = children.map(child => {
-				if(child.key === "navigation")
-					return(
-						<NavDemo key={child.key}>
-							{fetchChildren(child)}
-						</NavDemo>
-					)
-		})
-	return (
-		<SplitterLayout
-			primaryMinSize={bodyMinWidth}
-			secondaryMinSize={navMinWidth}
-			secondaryInitialSize={navWidth}
-			percentage={isPercentage}
-			customClassName={isCollapsed? 'isExpand' : ''}
-		>
-			<ContainerDemo>
-				{headerBodyFooter}
-			</ContainerDemo>
-			<NavDemo className={isCollapsed? 'isCollapsed' : ''}>
-				{nav}
-			</NavDemo>
-		</SplitterLayout>
-	)
+	<SplitterLayout
+	primaryMinSize={bodyMinWidth}
+	secondaryMinSize={navMinWidth}
+	secondaryInitialSize={navWidth}
+	percentage={isPercentage}
+	customClassName={isCollapsed? 'isExpand' : ''}
+	>
+		<ContainerDemo>
+			{headerTemplates}
+			{bodyTemplates}
+			{footerTemplates}
+		</ContainerDemo>
+		<NavDemo className={isCollapsed? 'isCollapsed' : ''}>
+			{nav}
+		</NavDemo>
+	</SplitterLayout>
+)
 }
 
-LayoutNCHBFDemo.propTypes = {
-  children: PropTypes.node.isRequired,
+LayoutNCHBF.propTypes = {
+children: PropTypes.node.isRequired || PropTypes.string.isRequired,
+header: PropTypes.node,
+footer: PropTypes.node,
+nav: PropTypes.node,
+navMinWidth: PropTypes.number,
+navWidth: PropTypes.number,
+bodyMinWidth: PropTypes.number,
+isPercentage: PropTypes.bool
 };
 
-export default LayoutNCHBFDemo;
+export default LayoutNCHBF;

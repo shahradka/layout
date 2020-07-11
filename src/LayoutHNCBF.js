@@ -10,59 +10,32 @@ import 'react-splitter-layout/lib/index.css';
 import './css/rtl.css';
 import './css/styles.css';
 
-function fetchChildren(input)
-{
-	if(!input || !input.children)
-		return input;
-	return fetchChildren(input.children);
-}
-
-	const LayoutHNCBF = ({children}) =>
+	const LayoutHNCBF = ({children, header, nav, footer}) =>
 	{
-		const headerNav = children.map(child => {
-			if(child.key === "header")
-				return (
-					<Header key={child.id}>
-						{fetchChildren(child)}
-					</Header>
-				)
-			else if(child.key === "navigation")
-				return(
-					<Nav horizonNav={true} key={child.id} >
-						{fetchChildren(child)}
-					</Nav>
-				)
-
-		});
-		const bodyFooter = children.map(child => {
-			if(child.key === "body")
-					return(
-						<Body key={child.id}>
-							{fetchChildren(child)}
-						</Body>
-					)
-			else if(child.key === "footer")
-			return(
-				<Footer key={child.id}>
-					{fetchChildren(child)}
-				</Footer>
-			)
-		})
+		const headerTemplates =<Header>{header}</Header>;
+		const navTemplates = <Nav horizonNav={true}>{nav}</Nav>;
+		const bodyTemplates = <Body>(children)</Body>;
+		const footerTemplates = <Footer>{footer}</Footer>
 
 	return (
 			<React.Fragment>
 				<HeaderContainer>
-					{headerNav}
+					{headerTemplates}
+					{navTemplates}
 				</HeaderContainer>
 				<Container>
-					{bodyFooter}
+					{bodyTemplates}
+					{footerTemplates}
 				</Container>
 			</React.Fragment>
 	)
 }
 
 LayoutHNCBF.propTypes = {
-  children: PropTypes.node.isRequired,
+	header: PropTypes.node,
+	nav: PropTypes.node,
+	footer: PropTypes.node,
+	children: PropTypes.node.isRequired ||  PropTypes.string.isRequired
 };
 
 export default LayoutHNCBF;

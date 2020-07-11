@@ -12,52 +12,17 @@ import 'react-splitter-layout/lib/index.css';
 import './css/rtl.css';
 import './css/styles.css';
 
-function fetchChildren(input)
-{
-	if(!input || !input.children)
-		return input;
-	return fetchChildren(input.children);
-}
-
-	const LayoutNCHBF = ({children, navMinWidth, navWidth, bodyMinWidth, isPercentage}) =>
+	const LayoutNCHBF = ({children, header, nav, footer, navMinWidth, navWidth, bodyMinWidth, isPercentage}) =>
 	{
 		const [isCollapsed,setIsCollapsed] = useState(false);
 		function handleClick(e)
 		{
 			setIsCollapsed(!isCollapsed);
 		}
-		const headerBodyFooter = children.map(child => {
-			if(child.key === "header")
-				return (
-					<HeaderContainer>
-					<CollapsibleButton onClick={handleClick} />
-					<Header key={child.id}>
-						{fetchChildren(child)}
-						</Header>
-					</HeaderContainer>
-				)
-			else if(child.key === "body")
-					return(
-						<Body key={child.id}>
-							{fetchChildren(child)}
-						</Body>
-					)
-			else if(child.key === "footer")
-			return(
-				<Footer key={child.id}>
-					{fetchChildren(child)}
-				</Footer>
-			)
-
-		});
-		const nav = children.map(child => {
-				if(child.key === "navigation")
-					return(
-						<Nav key={child.id} >
-							{fetchChildren(child)}
-						</Nav>
-					)
-		})
+		const headerTemplates = <HeaderContainer><CollapsibleButton onClick={handleClick} /><Header>{header}</Header></HeaderContainer>;
+		const bodyTemplates = 	<Body>{children}</Body>;
+		const navTemplates = {nav};
+		const footerTemplates = <Footer>{footer}</Footer>;
 
 	return (
 
@@ -69,17 +34,26 @@ function fetchChildren(input)
 		customClassName={isCollapsed? 'isExpand' : ''}
 		>
 			<Container>
-				{headerBodyFooter}
+				{headerTemplates}
+				{bodyTemplates}
+				{footerTemplates}
 			</Container>
 			<Nav className={isCollapsed? 'isCollapsed' : ''}>
-				{nav}
+				{navTemplates}
 			</Nav>
 		</SplitterLayout>
 	)
 }
 
 LayoutNCHBF.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired || PropTypes.string.isRequired,
+  header: PropTypes.node,
+  footer: PropTypes.node,
+  nav: PropTypes.node,
+  navMinWidth: PropTypes.number,
+  navWidth: PropTypes.number,
+  bodyMinWidth: PropTypes.number,
+  isPercentage: PropTypes.bool
 };
 
 export default LayoutNCHBF;

@@ -50,6 +50,24 @@ module.exports = {
 					},
 				},
 			},
+			{
+				// Some image formats so you can import images
+				test: /\.md$/,
+				use:[
+					{
+						loader: 'html-loader',
+						options: {
+							limit: 50000,
+						},
+					},
+					{
+						loader: "markdown-loader",
+						options: {
+								/* your options here */
+						}
+					}
+				]
+			},
 		],
 	},
 	// Here we define explicitly the file types we intend to deal with

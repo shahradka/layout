@@ -6,6 +6,6 @@ const HeaderContainerDemo = styled(HeaderContainer)`
     border: 1px solid #999;
     line-height: ${props => props.hasNav? '10px' : '53px'};
 		text-align: center;
-		flex-direction: ${props => props.hasNav? 'column' : 'row'};
+		flex-direction: row;
 `
 export default HeaderContainerDemo;

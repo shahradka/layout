@@ -244,22 +244,18 @@ const table = 					<table border="1">
 					</table>
 storiesOf('LayoutNCHBF')
 	.add('base', () => (
-		<LayoutNCHBFDemo bodyMinWidth={50} navMinWidth={5} navWidth={15} isPercentage={true}>
-			<div key="header">
-				<h5>Header</h5>
-			</div>
-			<div key="navigation">
-				<a>link1</a>
-				<a>link2</a>
-				<a>link3</a>
-				<a>link4</a>
-			</div>
-			<div key="body">
-				{table}
-			</div>
-			<div key="footer">
-				<h5>Footer</h5>
-			</div>
+		<LayoutNCHBFDemo header={<h5>Header</h5>}
+		nav={
+			<ul>
+				<li>link1</li>
+				<li>link2</li>
+				<li>link3</li>
+				<li>link4</li>
+			</ul>
+		}
+		footer={<h5>Footer</h5>}
+		bodyMinWidth={50} navMinWidth={5} navWidth={15} isPercentage={true}>
+			{table}
 		</LayoutNCHBFDemo>
 	))
 	.add('narrow', () => (
@@ -302,21 +298,25 @@ storiesOf('LayoutNCHBF')
 	))
 	storiesOf('LayoutHNCBF')
 	.add('base', () => (
-		<LayoutHNCBFDemo >
+		<LayoutHNCBFDemo
+			header={
 			<div key="header">
 				<h5>Header</h5>
-			</div>
-			<div key="navigation">
-				<a>link1</a>
-				<a>link2</a>
-				<a>link3</a>
-				<a>link4</a>
-			</div>
+			</div>}
+			nav={
+					<ul>
+						<li>link1</li>
+						<li>link2</li>
+						<li>link3</li>
+						<li>link4</li>
+					</ul>
+				}
+			footer={
+				<h5>Footer</h5>
+			}
+			>
 			<div key="body">
 				{table}
-			</div>
-			<div key="footer">
-				<h5>Footer</h5>
 			</div>
 		</LayoutHNCBFDemo>
 	))
